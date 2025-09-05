@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RSVP Confirmed</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Custom Tailwind Configuration - Reusing original theme */
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary-dark': '#382D2A', /* Deeper Espresso Brown */
+                        'accent-gold': '#95735a', /* Muted, Rich Gold */
+                        'light-cream': '#F4EBD9', /* Warm Cream */
+                    },
+                    fontFamily: {
+                        'display': ['"Cormorant Garamond"', 'serif'],
+                        'sans': ['"Playfair Display"', 'serif'],
+                    },
+                }
+            }
+        }
+
+        /* Additional custom styles for elegance */
+        body {
+            font-family: 'Playfair Display', serif;
+            color: #382D2A;
+            background-color: #dfcab8;
+        }
+    </style>
+</head>
+<body class="flex items-center justify-center min-h-screen text-center p-4">
+
+    <div class="max-w-xl mx-auto p-8 rounded-2xl shadow-xl border-t-2 border-accent-gold bg-light-cream">
+        <h1 class="font-display text-4xl md:text-5xl font-bold mb-4 text-accent-gold">
+            Thank You!
+        </h1>
+        <p class="font-sans text-lg md:text-xl text-primary-dark mb-8">
+            Your RSVP has been received with great joy. We are so excited to celebrate with you!
+        </p>
+        <a href="wedding.html" class="inline-block py-3 px-8 bg-accent-gold text-white font-display font-bold text-lg rounded-xl shadow-lg hover:bg-opacity-90 transition duration-300 ease-in-out transform hover:scale-105">
+            Return to the Wedding Page
+        </a>
+    </div>
+
+</body>
+</html>

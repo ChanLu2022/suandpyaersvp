@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pyae Zone & Su Lei Tun - Our Wedding</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;700&family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        /* Custom Tailwind Configuration - Updated for more elegance */
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary-dark': '#382D2A', /* Deeper Espresso Brown */
+                        'accent-gold': '#95735a', /* Muted, Rich Gold */
+                        'light-cream': '#F4EBD9', /* Warm Cream */
+                        'soft-gray': '#D4D4CE', /* Muted Gray */
+                        'form-border': '#7a6358', /* Slightly darker for borders */
+                        'form-bg-light': '#F4EBD9', /* Lighter than #dfcab8 for inputs */
+                    },
+                    fontFamily: {
+                        'display': ['"Cormorant Garamond"', 'serif'],
+                        'sans': ['"Playfair Display"', 'serif'],
+                    },
+                    backgroundImage: {
+                        'hero-bg': "url('https://images.unsplash.com/photo-1549727453-39f28c2e8111?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w1NjYyNTJ8MHwxfHNlYXJjaHwxNXx8bHV4dXJ5JTIwd2VkZGluZyUyMGJhY2tncm91bmR8ZW58MHx8fHwxNzA4NjgyMTk4fDA&ixlib=rb-4.0.3&q=80&w=1920')",
+                    }
+                }
+            }
+        }
+
+        /* Additional custom styles for elegance */
+        body {
+            font-family: 'Playfair Display', serif;
+            color: #382D2A;
+            background-color: #dfcab8;
+        }
+        .form-input {
+            @apply w-full p-3 mb-4 border-2 border-form-border rounded-xl bg-form-bg-light focus:outline-none focus:ring-2 focus:ring-accent-gold transition duration-300 ease-in-out;
+            max-width: 400px; /* Limit max width for readability */
+        }
+        .btn-submit {
+            @apply py-6 px-6 rounded-xl shadow-lg hover:bg-opacity-90 transition duration-300 ease-in-out transform hover:scale-105;
+            background-color: #F4EBD9;
+            color: #382D2A;
+            border: 2px solid #7a6358;
+            margin-top: 2rem; /* Explicitly add space above the button */
+        }
+        .hero-section {
+            background-image: var(--bg-image);
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+        }
+        .section-heading {
+            @apply font-display text-4xl md:text-5xl text-center mb-8 md:mb-12 text-primary-dark; 
+        }
+        .card {
+            @apply p-8 rounded-2xl shadow-xl border-t-2 border-accent-gold;
+        }
+        /* Background image for specific sections */
+        .bg-img-section {
+            background: url('background.png') no-repeat center center fixed;
+            background-size: cover;
+        }
+        /* Override for card background in RSVP to be #dfcab8 */
+        #rsvp .card {
+            background-color: #dfcab8;
+        }
+        /* Align form elements to the left, within the max-w-xl container */
+        #rsvpForm > div {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start; /* Align children to the start (left) */
+            width: 100%;
+            max-width: 400px; /* Match max-width of inputs */
+            margin: 0 auto; /* Center the div itself */
+        }
+        #rsvpForm > div > label {
+            width: auto; /* Label should only take as much width as its content */
+            text-align: left;
+        }
+        #rsvpForm > div > input.form-input,
+        #rsvpForm > div > textarea.form-input,
+        #rsvpForm > div > select.form-input {
+            width: 100%; 
+            border-radius: 0.75rem; /* Explicitly set rounded corners */
+            background-color: #F4EBD9; /* Ensure light background */
+        }
+        #rsvpForm .flex.items-center.space-x-6 {
+            width: auto; /* Allow radio buttons to take natural width */
+            justify-content: flex-start; /* Align radio buttons to the start (left) */
+        }
+        #rsvp .section-heading {
+             color: #382D2A; /* Ensure heading is dark on #dfcab8 background */
+        }
+        /* Specific centering for the submit button */
+        #rsvpForm .btn-submit {
+            margin: 0 auto; /* Center the button */
+            max-width: 400px; /* Match max-width of other inputs */
+            display: block; /* Make it a block element to take full width of max-width */
+        }
+        .is-invalid {
+            border-color: #dc2626; /* A red color */
+            animation: shake 0.4s;
+        }
+
+        @keyframes shake {
+            0% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            50% { transform: translateX(5px); }
+            75% { transform: translateX(-5px); }
+            100% { transform: translateX(0); }
+        }
+    </style>
+</head>
+<body>
+
+    <button id="scrollToTopBtn" class="fixed bottom-8 right-8 bg-accent-gold text-white p-4 rounded-full shadow-lg transition-opacity duration-300 opacity-0 z-50 hover:scale-110">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+        </svg>
+    </button>
+
+    <header class="bg-img-section shadow-lg fixed w-full z-50 top-0">
+        <nav class="container mx-auto px-4 py-4 flex flex-col md:flex-row justify-between items-center">
+ 
+            <ul class="flex flex-wrap justify-center md:space-x-8 space-x-4 text-primary-dark text-lg font-sans">
+                
+                <li><a href="#gallery" class="hover:text-accent-gold transition duration-300 rounded-lg p-2">Gallery</a></li>
+                <li><a href="#wedding-details" class="hover:text-accent-gold transition duration-300 rounded-lg p-2">Details</a></li>
+                <li><a href="#rsvp" class="hover:text-accent-gold transition duration-300 rounded-lg p-2">RSVP</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="mt-20">
+
+        <section id="hero" class="hero-section min-h-screen flex items-center justify-center text-center text-white p-8 relative" style="--bg-image: url('Image6.jpg')">
+            <div class="absolute inset-0 bg-black opacity-50"></div>
+            <div class="z-10 max-w-4xl mx-auto">
+                <p class="font-sans text-2xl md:text-3xl mb-4 tracking-wide text-light-cream">The Honour of Your Presence</p>
+                <h1 class="font-display text-5xl md:text-7xl lg:text-8xl font-bold mb-6 leading-tight text-accent-gold drop-shadow-lg">
+                    Pyae Zone & Su Lei Tun
+                </h1>
+                <p class="font-sans text-xl md:text-2xl tracking-wider text-light-cream">
+                    Are United in Marriage
+                </p>
+                <p class="font-sans text-xl md:text-3xl mt-6 tracking-wider font-bold text-light-cream">
+                    Sunday, October 26, 2025
+                </p>
+                <p class="font-sans text-lg md:text-xl mt-2 text-light-cream">
+                    Yangon Convention Center (YCC)
+                </p>
+            </div>
+        </section>
+
+        
+        <section id="gallery" class="py-16 px-4 md:px-8 bg-[#dfcab8] text-primary-dark">
+            <div class="max-w-6xl mx-auto">
+                <h2 class="section-heading">Our Favorite Moments</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="relative group rounded-xl overflow-hidden shadow-lg border border-soft-gray aspect-w-4 aspect-h-3">
+                        <img src="Image2.jpg" alt="Couple embracing on a mountain top" class="w-full h-full object-cover transform transition duration-500 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <p class="text-white text-lg font-display text-center">Engagement Bliss</p>
+                        </div>
+                    </div>
+                    <div class="relative group rounded-xl overflow-hidden shadow-lg border border-soft-gray aspect-w-4 aspect-h-3">
+                        <img src="Image3.jpg" alt="Couple traveling in a scenic landscape" class="w-full h-full object-cover transform transition duration-500 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <p class="text-white text-lg font-display text-center">Travel Adventures</p>
+                        </div>
+                    </div>
+                    <div class="relative group rounded-xl overflow-hidden shadow-lg border border-soft-gray aspect-w-4 aspect-h-3">
+                        <img src="Image4.jpg" alt="Candid shot of a couple laughing" class="w-full h-full object-cover transform transition duration-500 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <p class="text-white text-white text-lg font-display text-center">Candid Moments</p>
+                        </div>
+                    </div>
+                    <div class="relative group rounded-xl overflow-hidden shadow-lg border border-soft-gray aspect-w-4 aspect-h-3">
+                        <img src="Image5.jpg" alt="Couple at a elegant dinner" class="w-full h-full object-cover transform transition duration-500 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <p class="text-white text-lg font-display text-center">Cherished Memories</p>
+                        </div>
+                    </div>
+                    <div class="relative group rounded-xl overflow-hidden shadow-lg border border-soft-gray aspect-w-4 aspect-h-3">
+                        <img src="Image8.jpg" alt="Couple celebrating with champagne" class="w-full h-full object-cover transform transition duration-500 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <p class="text-white text-lg font-display text-center">Celebration</p>
+                        </div>
+                    </div>
+                    <div class="relative group rounded-xl overflow-hidden shadow-lg border border-soft-gray aspect-w-4 aspect-h-3">
+                        <img src="Image7.jpg" alt="Couple looking into each other's eyes" class="w-full h-full object-cover transform transition duration-500 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <p class="text-white text-lg font-display text-center">Simply Us</p>
+                        </div>
+                    </div>
+                    <div class="relative group rounded-xl overflow-hidden shadow-lg border border-soft-gray aspect-w-4 aspect-h-3">
+                        <img src="Image1.jpg" alt="A beautiful moment" class="w-full h-full object-cover transform transition duration-500 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <p class="text-white text-lg font-display text-center">A Beautiful Moment</p>
+                        </div>
+                    </div>
+                    <div class="relative group rounded-xl overflow-hidden shadow-lg border border-soft-gray aspect-w-4 aspect-h-3">
+                        <img src="Image10.jpg" alt="Another cherished memory" class="w-full h-full object-cover transform transition duration-500 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <p class="text-white text-lg font-display text-center">Another Memory</p>
+                        </div>
+                    </div>
+                    <div class="relative group rounded-xl overflow-hidden shadow-lg border border-soft-gray aspect-w-4 aspect-h-3">
+                        <img src="Image9.jpg" alt="Happiness captured" class="w-full h-full object-cover transform transition duration-500 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <p class="text-white text-lg font-display text-center">Happiness Captured</p>
+                        </div>
+                    </div>
+                    <div class="relative group rounded-xl overflow-hidden shadow-lg border border-soft-gray aspect-w-4 aspect-h-3">
+                        <img src="Image6.jpg" alt="Together forever" class="w-full h-full object-cover transform transition duration-500 group-hover:scale-110">
+                        <div class="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                            <p class="text-white text-lg font-display text-center">Together Forever</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="wedding-details" class="py-16 px-4 md:px-8 bg-[#dfcab8] text-primary-dark">
+            <div class="max-w-4xl mx-auto">
+                <h2 class="section-heading">Wedding Details</h2>
+                <div class="grid grid-cols-1 gap-12 text-center md:text-left">
+                    <div class="card bg-[#dfcab8]">
+                        <h3 class="font-display text-3xl font-bold mb-4 text-accent-gold">Ceremony & Reception</h3>
+                        <p class="font-sans text-lg mb-2 text-primary-dark">Sunday, October 26, 2025</p>
+                        <p class="font-sans text-lg mb-2 text-primary-dark">5:00 PM - Ceremony</p>
+                        <p class="font-sans text-lg mb-4 text-primary-dark">6:00 PM - Cocktail Hour & Reception to Follow</p>
+                        <p class="font-sans text-lg font-bold text-primary-dark">Yangon Convention Center (YCC)</p>
+                        <p class="font-sans text-md text-primary-dark">2 Pyay Road, Yangon</p>
+                        <a href="https://maps.google.com/?q=The+Grand+Ballroom,+City+Centre" target="_blank" class="text-accent-gold hover:underline mt-4 inline-block">View on Map</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="rsvp" class="py-16 px-4 md:px-8 bg-img-section text-primary-dark">
+            <div class="max-w-xl mx-auto card">
+                <h2 class="section-heading">Kindly RSVP</h2>
+                <form id="rsvpForm" class="space-y-6" action="https://script.google.com/macros/s/AKfycbx6G4ekuG0pHA5wxLq35Q1yv_s2Hm70SkOzCh6f1W6ClS36ox1weCpDB73up65RA56H/exec" method="POST">
+                    <div>
+                        <label for="fullName" class="block text-lg font-sans font-medium mb-2 text-primary-dark">Full Name</label>
+                        <input type="text" id="fullName" name="fullName" required class="form-input">
+                    </div>
+
+                    <div>
+                        <label for="contactNumber" class="block text-lg font-sans font-medium mb-2 text-primary-dark">Contact Number</label>
+                        <input type="tel" id="contactNumber" name="contactNumber" required class="form-input">
+                    </div>
+
+                    <div>
+                        <label for="email" class="block text-lg font-sans font-medium mb-2 text-primary-dark">Email Address</label>
+                        <input type="email" id="email" name="email" required class="form-input">
+                    </div>
+
+                    <div>
+                        <label for="address" class="block text-lg font-sans font-medium mb-2 text-primary-dark">Address</label>
+                        <textarea id="address" name="address" rows="3" required class="form-input"></textarea>
+                    </div>
+
+                    <div>
+                        <label class="block text-lg font-sans font-medium mb-2 text-primary-dark">Will you be attending the wedding?</label>
+                        <div class="flex items-center space-x-6">
+                            <label class="inline-flex items-center">
+                                <input type="radio" name="attending" value="yes" class="form-radio h-5 w-5 text-accent-gold" checked>
+                                <span class="ml-2 text-lg text-primary-dark">Joyfully Yes!</span>
+                            </label>
+                            <label class="inline-flex items-center">
+                                <input type="radio" name="attending" value="no" class="form-radio h-5 w-5 text-accent-gold">
+                                <span class="ml-2 text-lg text-primary-dark">Regrettably No</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div id="guestCountContainer">
+                        <label for="guestCount" class="block text-lg font-sans font-medium mb-2 text-primary-dark">Number of Guests (including yourself)</label>
+                        <select id="guestCount" name="guestCount" class="form-input">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                        </select>
+                    </div>
+
+                    <div id="guestNamesContainer" class="space-y-4">
+                        </div>
+
+                    <div>
+                        <label class="block text-lg font-sans font-medium mb-2 text-primary-dark">Menu Preference</label>
+                        <div class="flex items-center space-x-6">
+                            <label class="inline-flex items-center">
+                                <input type="radio" name="menuPreference" value="vegetarian" class="form-radio h-5 w-5 text-accent-gold" checked>
+                                <span class="ml-2 text-lg text-primary-dark">Vegetarian</span>
+                            </label>
+                            <label class="inline-flex items-center">
+                                <input type="radio" name="menuPreference" value="non-vegetarian" class="form-radio h-5 w-5 text-accent-gold">
+                                <span class="ml-2 text-lg text-primary-dark">Non-Vegetarian</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label for="dietaryRestrictions" class="block text-lg font-sans font-medium mb-2 text-primary-dark">Dietary Restrictions / Allergies (Optional)</label>
+                        <textarea id="dietaryRestrictions" name="dietaryRestrictions" rows="3" class="form-input"></textarea>
+                    </div>
+
+                    <div>
+                        <label for="message" class="block text-lg font-sans font-medium mb-2 text-primary-dark">A Special Message (Optional)</label>
+                        <textarea id="message" name="message" rows="4" class="form-input" placeholder="e.g., Wishing you a lifetime of happiness!"></textarea>
+                    </div>
+
+                    <div class="mt-8">
+                        <button type="submit" class="btn-submit">
+                            Send RSVP
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-primary-dark text-light-cream py-8 text-center text-sm font-sans">
+        <p>© 2025 Pyae Zone & Su Lei Tun. All Rights Reserved.</p>
+        <p class="mt-2">Created with Love.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const rsvpForm = document.getElementById('rsvpForm');
+            const attendingRadios = document.querySelectorAll('input[name="attending"]');
+            const guestCountSelect = document.getElementById('guestCount');
+            const guestCountContainer = document.getElementById('guestCountContainer');
+            const guestNamesContainer = document.getElementById('guestNamesContainer');
+            const scrollToTopBtn = document.getElementById('scrollToTopBtn');
+            
+            // Function to generate guest name input fields
+            function updateGuestNameInputs() {
+                guestNamesContainer.innerHTML = ''; // Clear existing inputs
+                const count = parseInt(guestCountSelect.value);
+                if (count > 1) {
+                    for (let i = 2; i <= count; i++) {
+                        const div = document.createElement('div');
+                        div.innerHTML = `
+                            <label for="guestName${i}" class="block text-lg font-sans font-medium mb-2 text-primary-dark">Guest ${i} Full Name</label>
+                            <input type="text" id="guestName${i}" name="guestName${i}" required class="form-input">
+                        `;
+                        // Apply centering styles to the newly created div and its children
+                        div.style.display = 'flex';
+                        div.style.flexDirection = 'column';
+                        div.style.alignItems = 'flex-start'; /* Align labels and inputs to the left */
+                        div.style.width = '100%';
+                        div.style.maxWidth = '400px'; /* Match max-width of other inputs */
+                        div.style.margin = '0 auto'; /* Center the div itself */
+                        guestNamesContainer.appendChild(div);
+                    }
+                }
+            }
+
+            // Event listener for attending radios
+            attendingRadios.forEach(radio => {
+                radio.addEventListener('change', function() {
+                    if (this.value === 'yes') {
+                        guestCountContainer.classList.remove('hidden');
+                        guestNamesContainer.classList.remove('hidden');
+                        updateGuestNameInputs(); // Show guest name inputs if attending and >1 guest
+                    } else {
+                        guestCountContainer.classList.add('hidden');
+                        guestNamesContainer.classList.add('hidden');
+                    }
+                });
+            });
+
+            // Event listener for guest count select
+            guestCountSelect.addEventListener('change', updateGuestNameInputs);
+
+            // Initial state check
+            if (document.querySelector('input[name="attending"]:checked').value === 'no') {
+                guestCountContainer.classList.add('hidden');
+                guestNamesContainer.classList.add('hidden');
+            } else {
+                updateGuestNameInputs(); // Call on load if 'yes' is already checked
+            }
+
+
+            rsvpForm.addEventListener('submit', function(event) {
+                event.preventDefault(); // Prevent default form submission
+
+                let allFieldsFilled = true;
+                const requiredFields = rsvpForm.querySelectorAll('[required]');
+                requiredFields.forEach(field => {
+                    if (!field.value.trim()) {
+                        field.classList.add('is-invalid');
+                        allFieldsFilled = false;
+                    } else {
+                        field.classList.remove('is-invalid');
+                    }
+                });
+
+                // Check for dynamically added guest name fields
+                const guestNameInputs = document.querySelectorAll('#guestNamesContainer input');
+                guestNameInputs.forEach(field => {
+                    if (!field.value.trim()) {
+                        field.classList.add('is-invalid');
+                        allFieldsFilled = false;
+                    } else {
+                        field.classList.remove('is-invalid');
+                    }
+                });
+
+
+                if (allFieldsFilled) {
+                    // Send the form data to the Google Apps Script
+                    fetch(rsvpForm.action, {
+                        method: 'POST',
+                        body: new FormData(rsvpForm)
+                    })
+                    .then(response => {
+                        if (response.ok) {
+                            // If successful, redirect to the success page
+                            console.log("Form submitted successfully! Redirecting...");
+                            window.location.href = 'success.html';
+                        } else {
+                            // Handle errors, if any
+                            console.error('Form submission failed.');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                    });
+                } else {
+                    console.log("Form is not valid. Please fill out all required fields.");
+                }
+            });
+
+            // Show/hide scroll-to-top button
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 300) {
+                    scrollToTopBtn.classList.remove('opacity-0');
+                    scrollToTopBtn.classList.add('opacity-100');
+                } else {
+                    scrollToTopBtn.classList.add('opacity-0');
+                    scrollToTopBtn.classList.remove('opacity-100');
+                }
+            });
+
+            // Scroll to top functionality
+            scrollToTopBtn.addEventListener('click', () => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
