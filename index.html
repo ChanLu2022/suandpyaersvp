@@ -417,19 +417,30 @@
 
 
                 if (allFieldsFilled) {
-                    // Send the form data to the Google Apps Script
+                    // Create a FormData object from the form
+                    const formData = new FormData(rsvpForm);
+                    
+                    // Convert FormData to URLSearchParams
+                    const params = new URLSearchParams();
+                    for (const [key, value] of formData.entries()) {
+                        params.append(key, value);
+                    }
+                    
+                    // Construct the redirect URL with the query parameters
+                    const redirectUrl = 'success.html?' + params.toString();
+                    
+                    // Now, send the data to the Google Apps Script and redirect after success
                     fetch(rsvpForm.action, {
                         method: 'POST',
-                        body: new FormData(rsvpForm)
+                        body: formData
                     })
                     .then(response => {
                         if (response.ok) {
-                            // If successful, redirect to the success page
+                            // On successful submission to Google Script, redirect with data
                             console.log("Form submitted successfully! Redirecting...");
-                            window.location.href = 'success.html';
+                            window.location.href = redirectUrl;
                         } else {
-                            // Handle errors, if any
-                            console.error('Form submission failed.');
+                            console.error('Form submission to Google Script failed.');
                         }
                     })
                     .catch(error => {
