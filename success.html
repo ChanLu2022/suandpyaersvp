@@ -38,13 +38,62 @@
         <h1 class="font-display text-4xl md:text-5xl font-bold mb-4 text-accent-gold">
             Thank You!
         </h1>
-        <p class="font-sans text-lg md:text-xl text-primary-dark mb-8">
+        <p class="font-sans text-lg md:text-xl text-primary-dark mb-4">
             Your RSVP has been received with great joy. We are so excited to celebrate with you!
         </p>
+
+        <div id="summary-container" class="text-left font-sans text-primary-dark mt-6 mb-8 p-4 bg-gray-100 rounded-lg border border-soft-gray">
+            <h2 class="font-display text-2xl font-bold mb-2 text-accent-gold text-center">Your Submission Summary</h2>
+            </div>
+
         <a href="wedding.html" class="inline-block py-3 px-8 bg-accent-gold text-white font-display font-bold text-lg rounded-xl shadow-lg hover:bg-opacity-90 transition duration-300 ease-in-out transform hover:scale-105">
             Return to the Wedding Page
         </a>
     </div>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const summaryContainer = document.getElementById('summary-container');
+            const params = new URLSearchParams(window.location.search);
+            
+            // Map form field names to human-readable labels
+            const labels = {
+                fullName: "Full Name",
+                contactNumber: "Contact Number",
+                email: "Email Address",
+                address: "Address",
+                attending: "Attending",
+                guestCount: "Number of Guests",
+                menuPreference: "Menu Preference",
+                dietaryRestrictions: "Dietary Restrictions / Allergies",
+                message: "Special Message"
+            };
+            
+            // Generate the summary from URL parameters
+            for (const [key, value] of params.entries()) {
+                // Skip empty or unwanted fields
+                if (!value || key === 'g-recaptcha-response') continue;
+                
+                // Determine the label to display
+                const label = labels[key] || key.replace(/([A-Z])/g, ' $1').trim(); // Default to camelCase to sentence case
+                
+                // Create a paragraph element for each item
+                const p = document.createElement('p');
+                p.classList.add('mb-1');
+                
+                // Format the output
+                let displayValue = value;
+                if (key === 'attending') {
+                    displayValue = value === 'yes' ? 'Joyfully Yes!' : 'Regrettably No';
+                }
+                if (key === 'menuPreference') {
+                    displayValue = value.charAt(0).toUpperCase() + value.slice(1);
+                }
+                
+                p.innerHTML = `<strong class="font-bold">${label}:</strong> ${displayValue}`;
+                summaryContainer.appendChild(p);
+            }
+        });
+    </script>
 </body>
 </html>
