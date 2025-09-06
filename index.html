@@ -40,22 +40,22 @@
 
         /* Additional custom styles for elegance */
         body {
-            font-family: 'Didot Regular', serif; /* Applied Didot to the entire body */
+            font-family: 'Didot Regular', serif;
             color: #382D2A;
             background-color: #dfcab8;
         }
         /* Update form input styles for a sleeker look */
         .form-input {
             @apply w-full p-4 mb-5 border-2 border-accent-gold rounded-full bg-transparent text-primary-dark placeholder-primary-dark/70 focus:outline-none focus:ring-2 focus:ring-accent-gold transition duration-300 ease-in-out;
-            max-width: 450px; /* Slightly wider for better balance */
-            font-family: 'Didot Regular', serif; /* Use the elegant serif font */
+            max-width: 450px;
+            font-family: 'Didot Regular', serif;
         }
         /* Style the labels to be more subtle */
         #rsvpForm label {
             font-family: 'Didot Regular', serif;
-            font-size: 1.25rem; /* Larger and more elegant font size */
+            font-size: 1.25rem;
             color: #382D2A;
-            letter-spacing: 0.05em; /* Add a little space between letters */
+            letter-spacing: 0.05em;
             text-align: center;
         }
         /* Improve the radio button labels */
@@ -66,50 +66,50 @@
         }
         /* Adjust the card styling for the RSVP section */
         #rsvp .card {
-            background-color: rgba(244, 235, 217, 0.7); /* Lighter cream with 70% opacity */
-            border-radius: 2rem; /* More rounded corners for a softer feel */
-            border-top: 4px solid #95735a; /* A thicker, more prominent gold border */
+            background-color: rgba(244, 235, 217, 0.7);
+            border-radius: 2rem;
+            border-top: 4px solid #95735a;
         }
         /* Style the submit button for a more refined appearance */
         .btn-submit {
             @apply py-4 px-12 rounded-full shadow-md transition duration-300 ease-in-out transform hover:scale-105;
-            background-color: #95735a; /* Use the accent gold color */
-            color: #F4EBD9; /* Use the light cream color for text */
+            background-color: #95735a;
+            color: #F4EBD9;
             border: none;
             font-family: 'Didot Regular', serif;
-            font-size: 1.5rem; /* Larger font size for elegance */
+            font-size: 1.5rem;
             letter-spacing: 0.1em;
         }
         /* Make the heading within the RSVP section more elegant */
         #rsvp .section-heading {
             font-family: 'Didot Regular', serif;
             font-weight: 700;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.1); /* Subtle shadow for depth */
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
         }
         .hero-section {
             background-image: var(--bg-image);
             background-size: cover;
             background-position: center;
-            background-attachment: scroll; /* Changed to scroll for better mobile support */
+            background-attachment: scroll;
         }
         .section-heading {
-            @apply font-display text-4xl md:text-5xl text-center mb-8 md:mb-12 text-primary-dark; 
+            @apply font-display text-4xl md:text-5xl text-center mb-8 md:mb-12 text-primary-dark;
         }
         .card {
             @apply p-8 rounded-2xl shadow-xl border-t-2 border-accent-gold;
         }
         
         #rsvp .section-heading {
-             color: #382D2A; /* Ensure heading is dark on #dfcab8 background */
+             color: #382D2A;
         }
         /* Specific centering for the submit button */
         .submit-container {
-            margin: 0 auto; /* Center the container */
-            max-width: 400px; /* Match max-width of other inputs */
+            margin: 0 auto;
+            max-width: 400px;
             text-align: center;
         }
         .is-invalid {
-            border-color: #dc2626; /* A red color */
+            border-color: #dc2626;
             animation: shake 0.4s;
         }
         
@@ -268,7 +268,7 @@
             </div>
         </section>
 
-        <section id="wedding-details" class="py-16 px-4 md:px-8 text-white text-center" style="background-image: url('Image3.jpg'); background-size: cover; background-position: center; background-blend-mode: overlay; background-color: rgba(223, 202, 184, 0.1);">
+        <section id="wedding-details" class="py-16 px-4 md:px-8 text-white text-center" style="background-image: url('Image3.jpg'); background-size: cover; background-position: center; background-blend-mode: overlay; background-color: rgba(223, 202, 184, 0.5);">
             <div class="max-w-4xl mx-auto">
                 <h2 class="section-heading text-white text-4xl md:text-5xl">Wedding Details</h2>
                 <div class="grid grid-cols-1 gap-12">
@@ -309,7 +309,7 @@
                     </div>
 
                     <div class="flex flex-col items-center justify-center">
-                        <label for="address" class="block text-lg font-sans font-medium mb-2 text-primary-dark">Address</label>
+                        <label for="address" class="block text-lg font-sans font-medium mb-2 text-primary-dark">Address (Township)</label>
                         <textarea id="address" name="address" rows="3" required class="form-input text-center"></textarea>
                     </div>
 
@@ -357,7 +357,7 @@
 
                     <div id="additionalGuestMenuPreferences"></div>
 
-                    <div class="flex flex-col items-center justify-center">
+                    <div class="flex flex-col items-center justify-center" id="dietaryRestrictionsContainer">
                         <label for="dietaryRestrictions" class="block text-lg font-sans font-medium mb-2 text-primary-dark">Dietary Restrictions / Allergies (Optional)</label>
                         <textarea id="dietaryRestrictions" name="dietaryRestrictions" rows="3" class="form-input text-center"></textarea>
                     </div>
@@ -419,6 +419,7 @@
             const guestNamesContainer = document.getElementById('guestNamesContainer');
             const menuPreferenceContainer = document.getElementById('menuPreferenceContainer');
             const additionalGuestMenuPreferences = document.getElementById('additionalGuestMenuPreferences');
+            const dietaryRestrictionsContainer = document.getElementById('dietaryRestrictionsContainer');
             const submitBtn = document.getElementById('submitBtn');
             const loadingMessage = document.getElementById('loadingMessage');
             const scrollToTopBtn = document.getElementById('scrollToTopBtn');
@@ -430,9 +431,11 @@
                 if (isAttending) {
                     guestCountContainer.classList.remove('hidden');
                     menuPreferenceContainer.classList.remove('hidden');
+                    dietaryRestrictionsContainer.classList.remove('hidden');
                 } else {
                     guestCountContainer.classList.add('hidden');
                     menuPreferenceContainer.classList.add('hidden');
+                    dietaryRestrictionsContainer.classList.add('hidden');
                 }
 
                 updateGuestFields(isAttending, guestCount);
