@@ -44,12 +44,22 @@
             color: #382D2A;
             background-color: #dfcab8;
         }
-        /* Update form input styles for a sleeker look */
+        
+        /* Update form input styles for a sleeker look and wider width */
         .form-input {
-            @apply w-full p-4 mb-5 border-2 border-accent-gold rounded-full bg-transparent text-primary-dark placeholder-primary-dark/70 focus:outline-none focus:ring-2 focus:ring-accent-gold transition duration-300 ease-in-out;
-            max-width: 450px;
+            @apply p-4 mb-5 border-2 border-accent-gold rounded-full bg-transparent text-primary-dark placeholder-primary-dark/70 focus:outline-none focus:ring-2 focus:ring-accent-gold transition duration-300 ease-in-out;
+            max-width: 450px; /* Corrected size for larger screens */
+            width: 100%; /* Ensure it fills the container while respecting max-width */
             font-family: 'Didot Regular', serif;
         }
+
+        /* Mobile-specific adjustments for form input width */
+        @media (max-width: 640px) {
+            .form-input {
+                max-width: 300px; /* Adjust for mobile screens */
+            }
+        }
+
         /* Style the labels to be more subtle */
         #rsvpForm label {
             font-family: 'Didot Regular', serif;
@@ -127,6 +137,21 @@
             75% { transform: translateX(-5px); }
             100% { transform: translateX(0); }
         }
+
+        /* Adjustment for spacing between headings */
+        #wedding-details .section-heading {
+            margin-bottom: 2rem; /* Added margin for a line space */
+        }
+        
+        /* New button styling for the "View on Map" link */
+        .map-btn {
+            @apply inline-block py-3 px-6 rounded-full font-sans text-lg shadow-md transition duration-300 ease-in-out transform hover:scale-105;
+            background-color: #95735a;
+            color: #F4EBD9;
+            border: none;
+            text-decoration: none; /* Remove underline */
+        }
+
     </style>
 </head>
 <body>
@@ -270,7 +295,7 @@
 
         <section id="wedding-details" class="py-16 px-4 md:px-8 text-white text-center" style="background-image: url('Image3.jpg'); background-size: cover; background-position: center; background-blend-mode: overlay; background-color: rgba(223, 202, 184, 0.1);">
             <div class="max-w-4xl mx-auto">
-                <h2 class="section-heading text-white text-4xl md:text-5xl">Wedding Details</h2>
+                <h2 class="section-heading text-white text-4xl md:text-5xl mb-12">Wedding Details</h2>
                 <div class="grid grid-cols-1 gap-12">
                     <div class="card" style="background-color: transparent; border: none;">
                         <h3 class="font-display text-3xl font-bold mb-4 text-white">Su Hlyar Yit Pat Ceremony & Reception</h3>
@@ -283,7 +308,9 @@
                         <p class="font-sans text-md mt-4 text-white">Inside Inya Lake Hotel Compound,</p>
                         <p class="font-sans text-md text-white">No. 37 Kabar Aye Pagoda Rd, Yangon 11191,</p>
                         <p class="font-sans text-md text-white">Myanmar (Burma)</p>
-                        <a href="https://maps.app.goo.gl/4pirk3hfURSg7kGx5" target="_blank" class="text-white hover:underline mt-4 inline-block">View on Map</a>
+                        <div class="mt-8">
+                            <a href="https://maps.app.goo.gl/4pirk3hfURSg7kGx5" target="_blank" class="map-btn">View on Map</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -460,7 +487,7 @@
                             guestNamesContainer.appendChild(guestNameDiv);
 
                             const guestMenuDiv = document.createElement('div');
-                            guestMenuDiv.className = 'flex flex-col items-center justify-center';
+                            guestMenuDiv.className = 'flex flex-col items-center justify-center mb-6'; // Added mb-6 here
                             guestMenuDiv.innerHTML = `
                                 <label class="block text-lg font-sans font-medium mb-2 text-primary-dark">Guest ${i} Menu Preference</label>
                                 <div class="flex items-center space-x-6">
